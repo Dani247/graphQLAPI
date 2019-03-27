@@ -38,8 +38,7 @@ const RootQuery = new GraphQLObjectType({
       async resolve (parentValue, args) {
         const { id } = args
         try {
-          const result = await getUserById(id)
-          return result
+          return await getUserById(id)
         } catch (error) {
           return null
         }
@@ -50,8 +49,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       async resolve (parentValue, args) {
         try {
-          const result = await getUsers()
-          return result
+          return await getUsers()
         } catch (error) {
           return null
         }
@@ -64,6 +62,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutations = new GraphQLObjectType({
   name: 'MutationsType',
   fields: {
+    // * adds new user
     addUser: {
       type: UserType,
       args: {
@@ -80,6 +79,7 @@ const Mutations = new GraphQLObjectType({
         }
       }
     },
+    // * edits user by id
     editUser: {
       type: UserType,
       args: {
@@ -97,6 +97,7 @@ const Mutations = new GraphQLObjectType({
         }
       }
     },
+    // * deletes user by id
     deleteUser: {
       type: UserType,
       args: {
