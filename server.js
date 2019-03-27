@@ -2,6 +2,7 @@ import express from 'express'
 import expressGraphQL from 'express-graphql'
 import schema from './graphQL/userSchema'
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 // * use .env
 require('dotenv').config()
@@ -11,6 +12,9 @@ const db = require('./config/db')
 
 // * initialize express app
 const app = express()
+
+// * middlewares
+app.use(cors())
 
 // * graphql endpoint
 app.use('/graphql', expressGraphQL({
